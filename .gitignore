@@ -1,0 +1,4 @@
+rest_client.http
+.env
+.dart_tool/build/generated/my_tmdb_movie/lib/env/env.envied.g.part
+lib/env/env.g.dart
