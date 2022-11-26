@@ -133,3 +133,4 @@ app.*.symbols
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
+.dart_tool/build/fcd1995bc647fb959e82ea360c6c2c9a/asset_graph.json
