@@ -4,11 +4,11 @@ import 'package:dio/dio.dart';
 import 'package:my_tmdb_movie/features/movies/domain/tmdb_movie.dart';
 import 'package:my_tmdb_movie/features/movies/domain/tmdb_movies_response.dart';
 
-class MoviewRepository {
+class MoviesRepository {
   final Dio client;
   final String apiKey;
 
-  MoviewRepository({
+  MoviesRepository({
     required this.client,
     required this.apiKey,
   });
@@ -26,3 +26,6 @@ class MoviewRepository {
     return movies.results;
   }
 }
+
+//@riverpod
+//MoviesRepository moviesRepository(MoviesRepositoryRef ref)=> Movies

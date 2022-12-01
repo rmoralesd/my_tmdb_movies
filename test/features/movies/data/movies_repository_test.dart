@@ -11,7 +11,7 @@ void main() async {
 
   final Dio dio = Dio(BaseOptions());
   final dioAdapter = DioAdapter(dio: dio);
-  MoviewRepository moviewRepository;
+  MoviesRepository moviewRepository;
 
   setUp(() {});
 
@@ -64,7 +64,7 @@ void main() async {
     dioAdapter.onGet('$baseUrl/movie/now_playing?api_key=$apiKey',
         (server) => server.reply(200, responsePayLoad));
 
-    moviewRepository = MoviewRepository(client: dio, apiKey: '1234key');
+    moviewRepository = MoviesRepository(client: dio, apiKey: '1234key');
     final response = await moviewRepository.nowPlayingMovies();
     expect(response.isNotEmpty, true);
     // final response =
