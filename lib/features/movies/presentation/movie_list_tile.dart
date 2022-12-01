@@ -21,20 +21,22 @@ class MovieListTile extends StatelessWidget {
           const SizedBox(
             width: 8,
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                movie.title!,
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              if (movie.releaseDate != null) ...[
-                const SizedBox(
-                  height: 8,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  movie.title!,
+                  style: Theme.of(context).textTheme.headline6,
                 ),
-                Text('Released: ${movie.releaseDate}'),
-              ]
-            ],
+                if (movie.releaseDate != null) ...[
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text('Released: ${movie.releaseDate}'),
+                ]
+              ],
+            ),
           ),
         ],
       ),
