@@ -18,7 +18,7 @@ void main() async {
   test(
       'Movies repository should return non empty list when calling nowPlayingMovies',
       () async {
-    final responsePayLoad = jsonEncode({
+    final responsePayLoad = {
       "dates": {"maximum": "2022-11-20", "minimum": "2022-10-03"},
       "page": 1,
       "results": [
@@ -59,7 +59,7 @@ void main() async {
       ],
       "total_pages": 100,
       "total_results": 1996
-    });
+    };
 
     dioAdapter.onGet('$baseUrl/movie/now_playing?api_key=$apiKey',
         (server) => server.reply(200, responsePayLoad));
