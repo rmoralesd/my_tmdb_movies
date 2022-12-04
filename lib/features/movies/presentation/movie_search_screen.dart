@@ -7,6 +7,8 @@ import 'movie_list_tile.dart';
 class MoviesSearchScreen extends ConsumerWidget {
   const MoviesSearchScreen({super.key});
 
+  static const pageSize = 20;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -18,7 +20,9 @@ class MoviesSearchScreen extends ConsumerWidget {
         body: ListView.custom(
           childrenDelegate: SliverChildBuilderDelegate(
             (context, index) {
-              final movieList = ref.watch(fetchMoviesProvider);
+              final page = index ~/ pageSize + 1;
+              print('index=$index, page=$page');
+              final movieList = ref.watch(fetchMoviesProvider(page: page));
               return movieList.when(
                 data: (movies) {
                   final indexInPage = index % 20;
@@ -26,7 +30,7 @@ class MoviesSearchScreen extends ConsumerWidget {
                   return MovieListTile(movie: movie);
                 },
                 error: (error, stackTrace) => Text('Error $error'),
-                loading: () => CircularProgressIndicator(),
+                loading: () => const CircularProgressIndicator(),
               );
             },
           ),

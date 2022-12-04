@@ -40,13 +40,72 @@ final moviesRepositoryProvider = AutoDisposeProvider<MoviesRepository>(
       : $moviesRepositoryHash,
 );
 typedef MoviesRepositoryRef = AutoDisposeProviderRef<MoviesRepository>;
-String $fetchMoviesHash() => r'7b39fd28177081c30978571fe865310eac9fb1b1';
+String $fetchMoviesHash() => r'a5df9a3f3b46979ff34e71d955e68dc231e9fd75';
 
 /// See also [fetchMovies].
-final fetchMoviesProvider = AutoDisposeFutureProvider<List<TMDBMovie>>(
-  fetchMovies,
-  name: r'fetchMoviesProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : $fetchMoviesHash,
-);
+class FetchMoviesProvider extends AutoDisposeFutureProvider<List<TMDBMovie>> {
+  FetchMoviesProvider({
+    required this.page,
+  }) : super(
+          (ref) => fetchMovies(
+            ref,
+            page: page,
+          ),
+          from: fetchMoviesProvider,
+          name: r'fetchMoviesProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : $fetchMoviesHash,
+        );
+
+  final dynamic page;
+
+  @override
+  bool operator ==(Object other) {
+    return other is FetchMoviesProvider && other.page == page;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, page.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
 typedef FetchMoviesRef = AutoDisposeFutureProviderRef<List<TMDBMovie>>;
+
+/// See also [fetchMovies].
+final fetchMoviesProvider = FetchMoviesFamily();
+
+class FetchMoviesFamily extends Family<AsyncValue<List<TMDBMovie>>> {
+  FetchMoviesFamily();
+
+  FetchMoviesProvider call({
+    required dynamic page,
+  }) {
+    return FetchMoviesProvider(
+      page: page,
+    );
+  }
+
+  @override
+  AutoDisposeFutureProvider<List<TMDBMovie>> getProviderOverride(
+    covariant FetchMoviesProvider provider,
+  ) {
+    return call(
+      page: provider.page,
+    );
+  }
+
+  @override
+  List<ProviderOrFamily>? get allTransitiveDependencies => null;
+
+  @override
+  List<ProviderOrFamily>? get dependencies => null;
+
+  @override
+  String? get name => r'fetchMoviesProvider';
+}

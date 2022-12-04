@@ -74,7 +74,7 @@ void main() async {
       () async {
     final listener = Listener();
 
-    dioAdapter.onGet('$baseUrl/movie/now_playing?api_key=$apiKey',
+    dioAdapter.onGet('$baseUrl/movie/now_playing?api_key=$apiKey&page=1',
         (server) => server.reply(200, responsePayLoad));
 
     moviesRepository = MoviesRepository(client: dio, apiKey: '1234key');
@@ -86,8 +86,9 @@ void main() async {
       fireImmediately: true,
     );
 
-    final result =
-        await container.read(moviesRepositoryProvider).nowPlayingMovies();
+    final result = await container
+        .read(moviesRepositoryProvider)
+        .nowPlayingMovies(page: 1);
 
     verify(listener(null, moviesRepository)).called(1);
     verifyNoMoreInteractions(listener);
@@ -96,14 +97,12 @@ void main() async {
   test(
     'Movies repository should return non empty list when calling nowPlayingMovies',
     () async {
-      dioAdapter.onGet('$baseUrl/movie/now_playing?api_key=$apiKey',
+      dioAdapter.onGet('$baseUrl/movie/now_playing?api_key=$apiKey&page=1',
           (server) => server.reply(200, responsePayLoad));
 
       moviesRepository = MoviesRepository(client: dio, apiKey: '1234key');
-      final response = await moviesRepository.nowPlayingMovies();
+      final response = await moviesRepository.nowPlayingMovies(page: 1);
       expect(response.isNotEmpty, true);
-      // final response =
-      //     await dio.get('$baseUrl/movie/now_playing?api_key=$apiKey');
     },
   );
 }
