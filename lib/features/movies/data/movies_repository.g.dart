@@ -40,7 +40,7 @@ final moviesRepositoryProvider = AutoDisposeProvider<MoviesRepository>(
       : $moviesRepositoryHash,
 );
 typedef MoviesRepositoryRef = AutoDisposeProviderRef<MoviesRepository>;
-String $fetchMoviesHash() => r'6c0a0bacff28df1a92a0afb890d72ce127a2dfc9';
+String $fetchMoviesHash() => r'7b39fd28177081c30978571fe865310eac9fb1b1';
 
 /// See also [fetchMovies].
 final fetchMoviesProvider = AutoDisposeFutureProvider<List<TMDBMovie>>(
