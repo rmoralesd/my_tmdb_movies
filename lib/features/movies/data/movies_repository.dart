@@ -30,7 +30,7 @@ class MoviesRepository {
     ).toString();
     final jsonResponse = await client.get(url);
     final movies = TMDBMoviesResponse.fromJson(jsonResponse.data);
-    print('new movies');
+    //print('new movies');
     return movies.results;
   }
 }
