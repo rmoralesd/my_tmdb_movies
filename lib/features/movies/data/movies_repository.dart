@@ -1,4 +1,4 @@
-import 'dart:convert';
+import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:my_tmdb_movie/env/env.dart';
@@ -42,5 +42,12 @@ MoviesRepository moviesRepository(MoviesRepositoryRef ref) =>
 @riverpod
 Future<List<TMDBMovie>> fetchMovies(FetchMoviesRef ref, {required page}) async {
   final moviesRepo = ref.watch(moviesRepositoryProvider);
+  final link = ref.keepAlive();
+  final timer = Timer(const Duration(seconds: 30), () {
+    link.close();
+  });
+  ref.onDispose(() {
+    timer.cancel();
+  });
   return moviesRepo.nowPlayingMovies(page: page);
 }
