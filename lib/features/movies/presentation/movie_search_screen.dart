@@ -12,6 +12,7 @@ class MoviesSearchScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final query = ref.watch(moviesSearchTextProvider);
     return Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -27,8 +28,8 @@ class MoviesSearchScreen extends ConsumerWidget {
                   (context, index) {
                     final page = index ~/ pageSize + 1;
                     //print('index=$index, page=$page');
-                    final movieList =
-                        ref.watch(fetchMoviesProvider(page: page));
+                    final movieList = ref
+                        .watch(fetchMoviesProvider(page: page, query: query));
                     return movieList.when(
                       data: (movies) {
                         final indexInPage = index % 20;

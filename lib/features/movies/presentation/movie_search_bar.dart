@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MoviesSearchBar extends StatefulWidget {
+final moviesSearchTextProvider = StateProvider<String>((ref) {
+  return '';
+});
+
+class MoviesSearchBar extends ConsumerStatefulWidget {
   const MoviesSearchBar({super.key});
 
   @override
-  State<MoviesSearchBar> createState() => _MoviesSearchBarState();
+  ConsumerState<MoviesSearchBar> createState() => _MoviesSearchBarState();
 }
 
-class _MoviesSearchBarState extends State<MoviesSearchBar> {
+class _MoviesSearchBarState extends ConsumerState<MoviesSearchBar> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -32,6 +37,8 @@ class _MoviesSearchBarState extends State<MoviesSearchBar> {
                     hintStyle: TextStyle(color: Colors.grey.shade400),
                     isDense: true,
                   ),
+                  onChanged: (text) =>
+                      ref.read(moviesSearchTextProvider.notifier).state = text,
                 ),
               ),
             ],

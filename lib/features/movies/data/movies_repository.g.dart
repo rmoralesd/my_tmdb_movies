@@ -40,16 +40,18 @@ final moviesRepositoryProvider = AutoDisposeProvider<MoviesRepository>(
       : $moviesRepositoryHash,
 );
 typedef MoviesRepositoryRef = AutoDisposeProviderRef<MoviesRepository>;
-String $fetchMoviesHash() => r'a5df9a3f3b46979ff34e71d955e68dc231e9fd75';
+String $fetchMoviesHash() => r'97db0f04d8f20d8408a99f0a05a78281dcf65727';
 
 /// See also [fetchMovies].
 class FetchMoviesProvider extends AutoDisposeFutureProvider<List<TMDBMovie>> {
   FetchMoviesProvider({
     required this.page,
+    required this.query,
   }) : super(
           (ref) => fetchMovies(
             ref,
             page: page,
+            query: query,
           ),
           from: fetchMoviesProvider,
           name: r'fetchMoviesProvider',
@@ -59,17 +61,21 @@ class FetchMoviesProvider extends AutoDisposeFutureProvider<List<TMDBMovie>> {
                   : $fetchMoviesHash,
         );
 
-  final dynamic page;
+  final int page;
+  final String query;
 
   @override
   bool operator ==(Object other) {
-    return other is FetchMoviesProvider && other.page == page;
+    return other is FetchMoviesProvider &&
+        other.page == page &&
+        other.query == query;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, page.hashCode);
+    hash = _SystemHash.combine(hash, query.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -84,10 +90,12 @@ class FetchMoviesFamily extends Family<AsyncValue<List<TMDBMovie>>> {
   FetchMoviesFamily();
 
   FetchMoviesProvider call({
-    required dynamic page,
+    required int page,
+    required String query,
   }) {
     return FetchMoviesProvider(
       page: page,
+      query: query,
     );
   }
 
@@ -97,6 +105,7 @@ class FetchMoviesFamily extends Family<AsyncValue<List<TMDBMovie>>> {
   ) {
     return call(
       page: provider.page,
+      query: provider.query,
     );
   }
 

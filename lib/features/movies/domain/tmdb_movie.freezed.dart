@@ -35,7 +35,7 @@ mixin _$TMDBMovie {
   @JsonKey(name: 'poster_path')
   String? get posterPath => throw _privateConstructorUsedError;
   @JsonKey(name: 'release_date')
-  DateTime? get releaseDate => throw _privateConstructorUsedError;
+  String? get releaseDate => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   bool? get video => throw _privateConstructorUsedError;
   @JsonKey(name: 'vote_average')
@@ -64,7 +64,7 @@ abstract class $TMDBMovieCopyWith<$Res> {
       String? overview,
       double? popularity,
       @JsonKey(name: 'poster_path') String? posterPath,
-      @JsonKey(name: 'release_date') DateTime? releaseDate,
+      @JsonKey(name: 'release_date') String? releaseDate,
       String? title,
       bool? video,
       @JsonKey(name: 'vote_average') double? voteAverage,
@@ -139,7 +139,7 @@ class _$TMDBMovieCopyWithImpl<$Res, $Val extends TMDBMovie>
       releaseDate: freezed == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -177,7 +177,7 @@ abstract class _$$_TmdbMovieCopyWith<$Res> implements $TMDBMovieCopyWith<$Res> {
       String? overview,
       double? popularity,
       @JsonKey(name: 'poster_path') String? posterPath,
-      @JsonKey(name: 'release_date') DateTime? releaseDate,
+      @JsonKey(name: 'release_date') String? releaseDate,
       String? title,
       bool? video,
       @JsonKey(name: 'vote_average') double? voteAverage,
@@ -250,7 +250,7 @@ class __$$_TmdbMovieCopyWithImpl<$Res>
       releaseDate: freezed == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -326,7 +326,7 @@ class _$_TmdbMovie implements _TmdbMovie {
   final String? posterPath;
   @override
   @JsonKey(name: 'release_date')
-  final DateTime? releaseDate;
+  final String? releaseDate;
   @override
   final String? title;
   @override
@@ -417,7 +417,7 @@ abstract class _TmdbMovie implements TMDBMovie {
       final String? overview,
       final double? popularity,
       @JsonKey(name: 'poster_path') final String? posterPath,
-      @JsonKey(name: 'release_date') final DateTime? releaseDate,
+      @JsonKey(name: 'release_date') final String? releaseDate,
       final String? title,
       final bool? video,
       @JsonKey(name: 'vote_average') final double? voteAverage,
@@ -451,7 +451,7 @@ abstract class _TmdbMovie implements TMDBMovie {
   String? get posterPath;
   @override
   @JsonKey(name: 'release_date')
-  DateTime? get releaseDate;
+  String? get releaseDate;
   @override
   String? get title;
   @override
