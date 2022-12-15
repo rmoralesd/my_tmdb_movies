@@ -15,6 +15,17 @@ class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithBottomNavBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: widget.child,
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+              icon: const Icon(Icons.search), label: 'Search'),
+          BottomNavigationBarItem(
+              icon: const Icon(
+                Icons.favorite,
+              ),
+              label: 'Favorites'),
+        ],
+      ),
     );
   }
 }
