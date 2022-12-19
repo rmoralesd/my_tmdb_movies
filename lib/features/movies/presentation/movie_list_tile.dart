@@ -7,9 +7,11 @@ class MovieListTile extends StatelessWidget {
   const MovieListTile({
     Key? key,
     required this.movie,
+    this.onPressed,
   }) : super(key: key);
 
   final TMDBMovie movie;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,9 @@ class MovieListTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Row(
         children: [
-          MoviePoster(imagePath: movie.posterPath),
+          GestureDetector(
+              onTap: onPressed,
+              child: MoviePoster(imagePath: movie.posterPath)),
           const SizedBox(
             width: 8,
           ),

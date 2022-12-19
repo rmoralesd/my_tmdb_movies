@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_tmdb_movie/features/movies/presentation/movie_search_screen.dart';
@@ -21,11 +21,23 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           },
           routes: [
             GoRoute(
-              path: '/movies',
-              pageBuilder: (context, state) => NoTransitionPage(
-                child: const MoviesSearchScreen(),
-              ),
-            )
+                path: '/movies',
+                name: 'movies',
+                pageBuilder: (context, state) => NoTransitionPage(
+                      key: state.pageKey,
+                      child: const MoviesSearchScreen(),
+                    ),
+                routes: [
+                  GoRoute(
+                      path: ':id',
+                      name: 'movie',
+                      pageBuilder: ((context, state) {
+                        print('key = ${state.pageKey}');
+                        return MaterialPage(
+                            key: state.pageKey,
+                            child: const Text('Details page'));
+                      }))
+                ])
           ])
     ],
   );

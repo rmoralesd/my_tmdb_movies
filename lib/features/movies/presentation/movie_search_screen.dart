@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:my_tmdb_movie/features/movies/data/movies_repository.dart';
 import 'package:my_tmdb_movie/features/movies/presentation/movie_search_bar.dart';
 
@@ -34,7 +35,14 @@ class MoviesSearchScreen extends ConsumerWidget {
                       data: (movies) {
                         final indexInPage = index % 20;
                         final movie = movies[indexInPage];
-                        return MovieListTile(movie: movie);
+                        return MovieListTile(
+                          movie: movie,
+                          onPressed: () => context.goNamed('movie',
+                              params: {
+                                'id': movie.id.toString(),
+                              },
+                              extra: movie),
+                        );
                       },
                       error: (error, stackTrace) => Text('Error $error'),
                       loading: () => const CircularProgressIndicator(),
