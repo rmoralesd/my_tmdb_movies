@@ -37,11 +37,13 @@ class MoviesSearchScreen extends ConsumerWidget {
                         final movie = movies[indexInPage];
                         return MovieListTile(
                           movie: movie,
-                          onPressed: () => context.goNamed('movie',
-                              params: {
-                                'id': movie.id.toString(),
-                              },
-                              extra: movie),
+                          onPressed: () => context.goNamed(
+                            'movie',
+                            params: {
+                              'id': movie.id.toString(),
+                            },
+                            extra: movie,
+                          ),
                         );
                       },
                       error: (error, stackTrace) => Text('Error $error'),

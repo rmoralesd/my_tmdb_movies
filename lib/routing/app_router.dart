@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:my_tmdb_movie/features/movies/domain/tmdb_movie.dart';
+import 'package:my_tmdb_movie/features/movies/presentation/movie_details_screen.dart';
 import 'package:my_tmdb_movie/features/movies/presentation/movie_search_screen.dart';
 import 'package:my_tmdb_movie/routing/scaffold_with_bottom_nav_bar.dart';
 
@@ -32,10 +34,12 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                       path: ':id',
                       name: 'movie',
                       pageBuilder: ((context, state) {
-                        print('key = ${state.pageKey}');
+                        final movie = state.extra as TMDBMovie;
                         return MaterialPage(
                             key: state.pageKey,
-                            child: const Text('Details page'));
+                            child: MovieDetailsScreen(
+                              movie: movie,
+                            ));
                       }))
                 ])
           ])
