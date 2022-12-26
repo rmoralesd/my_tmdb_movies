@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:my_tmdb_movie/features/movies/presentation/movie_poster.dart';
 import 'package:shimmer/shimmer.dart';
 
 class MovieListTileShimmer extends StatelessWidget {
-  const MovieListTileShimmer({super.key});
+  final PosterSize posterSize;
+  const MovieListTileShimmer({super.key, required this.posterSize});
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +19,8 @@ class MovieListTileShimmer extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                width: 92.0,
-                height: 138.0,
+                width: posterSizes[posterSize]!["width"]!,
+                height: posterSizes[posterSize]!["height"]!,
                 color: Colors.black,
               ),
               const SizedBox(

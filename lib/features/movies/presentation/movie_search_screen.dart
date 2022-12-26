@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_tmdb_movie/features/movies/data/movies_repository.dart';
 import 'package:my_tmdb_movie/features/movies/presentation/movie_list_tile_shimmer.dart';
+import 'package:my_tmdb_movie/features/movies/presentation/movie_poster.dart';
 import 'package:my_tmdb_movie/features/movies/presentation/movie_search_bar.dart';
 
 import 'movie_list_tile.dart';
@@ -48,7 +49,9 @@ class MoviesSearchScreen extends ConsumerWidget {
                         );
                       },
                       error: (error, stackTrace) => Text('Error $error'),
-                      loading: () => const MovieListTileShimmer(),
+                      loading: () => const MovieListTileShimmer(
+                        posterSize: PosterSize.w154,
+                      ),
                     );
                   },
                 ),

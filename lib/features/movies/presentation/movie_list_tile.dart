@@ -21,7 +21,10 @@ class MovieListTile extends StatelessWidget {
         children: [
           GestureDetector(
               onTap: onPressed,
-              child: MoviePoster(imagePath: movie.posterPath)),
+              child: MoviePoster(
+                imagePath: movie.posterPath,
+                posterSize: PosterSize.w154,
+              )),
           const SizedBox(
             width: 8,
           ),
